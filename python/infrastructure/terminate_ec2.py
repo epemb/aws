@@ -9,15 +9,8 @@ def get_all_instances():
 
     for reservation in response["Reservations"]:
         for instance in reservation["Instances"]:
-            name = None
-            for tag in instance.get("Tags", []):
-                if tag["Key"] == "Name":
-                    name = tag["Value"]
-                    break
-
             instances.append({
-                "InstanceId": instance["InstanceId"],
-                "Name": name,
+                "InstanceId": instance["InstanceId"],                
                 "PrivateIpAddress": instance.get("PrivateIpAddress"),
             })
 
@@ -26,7 +19,7 @@ def get_all_instances():
 
 def find_instance(identifier, instances):
     for instance in instances:
-        if identifier in (instance["InstanceId"], instance["Name"], instance["PrivateIpAddress"]):
+        if identifier in (instance["InstanceId"], instance["PrivateIpAddress"]):
             return instance
     return None
 
@@ -41,7 +34,7 @@ def remove_instance():
         return
 
     client.terminate_instances(InstanceIds=[instance["InstanceId"]])
-    print(f"Terminated instance {instance['InstanceId']} ({instance['Name']})")
+    print(f"Terminated instance {instance['InstanceId']})")
 
 
 if __name__ == "__main__":
