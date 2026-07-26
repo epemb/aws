@@ -26,7 +26,7 @@ def find_instance(identifier, instances):
 
 def remove_instance():
     instances = get_all_instances()
-    identifier = input("Enter instance name or private IP to remove: ").strip()
+    identifier = input("Enter instance ID or private IP to remove: ").strip()
 
     instance = find_instance(identifier, instances)
     if instance is None:
@@ -34,7 +34,7 @@ def remove_instance():
         return
 
     client.terminate_instances(InstanceIds=[instance["InstanceId"]])
-    print(f"Terminated instance {instance['InstanceId']})")
+    print(f"Terminated instance {instance["InstanceId"]}")
 
 
 if __name__ == "__main__":
