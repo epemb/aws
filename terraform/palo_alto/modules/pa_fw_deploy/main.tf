@@ -150,7 +150,7 @@ resource "aws_network_interface" "gwlb_data" {
   }
 }
 
-resource "aws_instance" "pa-trial-end-17-august-26" {
+resource "aws_instance" "pa-instance" {
   ami           = data.aws_ami.pa-image.id
   instance_type = "m5.xlarge"
   key_name      = aws_key_pair.pa_fw.key_name
